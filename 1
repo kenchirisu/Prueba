@@ -1,0 +1,141 @@
+#include <iostream>
+using namespace std;
+
+int main (){
+const int TURNOS=3;
+    int i, turno, legajo, tipo, VentasBaja=0, maxTurno, PromedioTurno=0;
+    float litros, importe, TotalLitros=0, LitrosTipo1=0, LitrosTipo2=0, LitrosTipo3=0;
+    float RecaudacionPorTurno=0, maxRecaudacion=0;
+    bool VendioTipo1=false, VendioTipo2=false, VendioTipo3=false;
+
+    float LitrosPorTurno;
+    int cantVentasporTurno;
+
+
+
+    for(i=1;i<=TURNOS;i++){
+            cout << "Turno: ";
+            cin >> turno;
+            cout << "Legajo: ";
+            cin >> legajo;
+
+        LitrosPorTurno=0;
+        cantVentasporTurno=0;
+
+        RecaudacionPorTurno=0;
+
+        while(legajo !=0 ){
+                cout << "Tipo de Combustible: ";
+                cin >> tipo;
+                cout << endl;
+                cout << "Litros vendidos: ";
+                cin >> litros;
+                cout << endl;
+                cout << "Importe de venta: ";
+                cin >> importe;
+                cout << endl;
+
+            if(litros<15){
+                VentasBaja++;
+            }
+
+            TotalLitros+=litros;
+
+
+
+            RecaudacionPorTurno+=importe;
+
+            switch(tipo){
+                case 1:
+            LitrosTipo1+=litros;
+                if(turno==3){
+                VendioTipo1=true;
+            }
+                break;
+                case 2:
+            LitrosTipo2+=litros;
+                if(turno==3){
+                VendioTipo2=true;
+            }
+                break;
+                case 3:
+            LitrosTipo3+=litros;
+                    if(turno==3){
+                VendioTipo3=true;
+            }
+                break;
+
+            }
+
+            cantVentasporTurno++;
+            LitrosPorTurno+=litros;
+
+
+
+
+
+            cout << "---------------------------" << endl;
+            cout << "Legajo: ";
+            cin >> legajo;
+
+        }
+
+        if(cantVentasporTurno>0){
+            PromedioTurno=LitrosPorTurno/cantVentasporTurno;
+        }
+
+        cout << "Punto C) " << endl;
+
+        cout << "Turno: " << turno << endl;
+        cout << "Promedio: " << PromedioTurno << endl;
+
+
+        cout << endl;
+
+            if(RecaudacionPorTurno>maxRecaudacion){
+                maxRecaudacion=RecaudacionPorTurno;
+                maxTurno=turno;
+            }
+    }
+
+
+
+
+
+
+
+
+    cout << "Punto A) " << endl;
+    cout << "Porcentaje tipo 1: " << (LitrosTipo1 / TotalLitros)*100 << endl;
+    cout << "Porcentaje tipo 2: " << (LitrosTipo2 / TotalLitros)*100 << endl;
+    cout << "Porcentaje tipo 3: " << (LitrosTipo3 / TotalLitros)*100 << endl;
+
+    cout << "Punto C) " << endl;
+    cout << "Tipo de combustible no vendidos: " ;
+        if(VendioTipo1== false){
+        cout << "1 ";
+    }
+        if(VendioTipo2== false){
+        cout << "2 ";
+    }
+        if(VendioTipo3== false){
+        cout << "3 ";
+    }
+
+    cout << endl;
+
+    cout << "Punto D) " << endl;
+    cout << "Turno: " << maxTurno << endl;
+    cout << "Recaudacion: $" << maxRecaudacion << endl;
+
+
+    cout << "Punto E) " << endl;
+    cout << "Cantidad de ventas menores a 15 litros: " << VentasBaja << endl;
+
+
+
+
+
+
+return 0;
+}
